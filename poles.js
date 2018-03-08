@@ -1,3 +1,11 @@
+function setup() {
+    createCanvas(640, 480);
+}
+
+function draw() {
+    // TODO: Draw stick figure and pole
+}
+
 function calculate() {
     let flex = document.getElementById('flex').value;
     let mass = document.getElementById('mass').value;
