@@ -1,9 +1,28 @@
+let jumpHeight = 0;
+
 function setup() {
-    createCanvas(640, 480);
+    createCanvas(1024, 480);
 }
 
 function draw() {
-    // TODO: Draw stick figure and pole
+    let xOrg = 320;
+    let yOrg = 240;
+    
+    translate(xOrg, yOrg);
+    strokeWeight(2);
+    // Stick figure
+    line(0, 0, 0, 75);
+    line(0, 30, 35, 35);
+    line(0, 30, -35, 35);
+    line(0, 75, 25, 35+75);
+    line(0, 75, -25, 35+75);
+    ellipse(0, 0, 30, 30);
+    
+    // Pole
+    translate(xOrg, yOrg-240);
+    line(0, -100, 0, 100);
+    line(50, -100, 50, 100);
+    line(0, -90, 50, -90);
 }
 
 function calculate() {
@@ -24,5 +43,6 @@ function calculate() {
     let result = document.getElementById('result');
 
     result.innerHTML = (a + b + c).toFixed(2) + " meters";
+    jumpHeight = (a + b + c).toFixed(2);
 
 }
