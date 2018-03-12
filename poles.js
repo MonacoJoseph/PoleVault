@@ -15,7 +15,7 @@ function setup() {
 }
 
 function draw() {
-    background(50, 89, 100);
+    background(255, 255, 255);
     let xOrg = 320;
     let yOrg = 240;
 
