@@ -1,6 +1,4 @@
 let jumpHeight = 0;
-let xPos = 0;
-let yPos = 0;
 
 let x = 0;
 let y = 0;
@@ -8,7 +6,7 @@ let time = 0;
 let diameter = 35;
 let speed = 0.8;
 
-const accel = 0.00001;
+const accel = 0.001;
 
 function setup() {
     createCanvas(1024, 480);
@@ -20,37 +18,36 @@ function draw() {
     let yOrg = 240;
 
     translate(xOrg, yOrg);
-    strokeWeight(2);
 
     setInterval(move(), 1000);
     setInterval(display(), 1000);
 
     // Pole
-    //translate(xOrg, yOrg-240);
     strokeWeight(3);
     line(125, -100, 125, 100);
     line(150, -100, 150, 100);
     line(125, -90, 150, -90);
 }
 
-
+// Move stick man
 function move() {
   if(x <= 140) {
-    x += speed;
-    y -= speed;
+    x += accel*time + speed;
+    y -= accel*time + speed;
   } else {
-    x += speed;
-    y += speed;
+    x += accel*time + speed;
+    y += accel*time + speed;
   }
-  speed += accel;
-  //if(x >= 48+240 || x <= 48-240) speed = -speed;
+  
   time = time + 1;
 }
 
+// Display stick man
 function display() {
   ellipse(x, y, diameter, diameter);
 }
 
+// Calculates potential jump height of pole vaulter.
 function calculate() {
     let flex = document.getElementById('flex').value;
     let mass = document.getElementById('mass').value;
