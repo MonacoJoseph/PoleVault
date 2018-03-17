@@ -6,10 +6,11 @@ let time = 0;
 let diameter = 35;
 let speed = 0.8;
 
-const accel = 0.001;
+let accel = 0.001;
 
 function setup() {
     createCanvas(1024, 480);
+    //frameRate(1);
 }
 
 function draw() {
@@ -19,8 +20,8 @@ function draw() {
 
     translate(xOrg, yOrg);
 
-    setInterval(move(), 1000);
-    setInterval(display(), 1000);
+    move();
+    display();
 
     // Pole
     strokeWeight(3);
@@ -31,15 +32,17 @@ function draw() {
 
 // Move stick man
 function move() {
+  accel = accel + 0.1;
   if(x <= 140) {
-    x += accel*time + speed;
-    y -= accel*time + speed;
+    x += accel*time*time + speed*time;
+    y -= accel*time*time + speed*time;
   } else {
-    x += accel*time + speed;
-    y += accel*time + speed;
+    x += accel*time*time + speed*time;
+    y += accel*time*time + speed*time;
   }
   
   time = time + 1;
+  
 }
 
 // Display stick man
