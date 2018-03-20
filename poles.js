@@ -10,39 +10,41 @@ let accel = 0.001;
 
 function setup() {
     createCanvas(1024, 480);
-    //frameRate(1);
+    frameRate(5);
 }
 
 function draw() {
-    background(255, 255, 255);
     let xOrg = 320;
     let yOrg = 240;
 
     translate(xOrg, yOrg);
-
+    // Erase all circles after one jump
+    if(x >=300) 
+        background(255, 255, 255);
+    
     move();
     display();
-
+    
     // Pole
     strokeWeight(3);
     line(125, -100, 125, 100);
     line(150, -100, 150, 100);
     line(125, -90, 150, -90);
+    // Pole is at (125, -100), (150, -100).
 }
 
 // Move stick man
 function move() {
-  accel = accel + 0.1;
-  if(x <= 140) {
-    x += accel*time*time + speed*time;
-    y -= accel*time*time + speed*time;
-  } else {
-    x += accel*time*time + speed*time;
-    y += accel*time*time + speed*time;
+  if(x >= 300) {
+      x = 0;
+      time = 0;
+      accel = 0.001;
   }
+    
+  x += accel*time*time + speed*time;
+  y = (1.0/100)*(x-135)*(x-135) - 100;
   
   time = time + 1;
-  
 }
 
 // Display stick man
