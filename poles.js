@@ -19,8 +19,8 @@ function draw() {
 
     translate(xOrg, yOrg);
     // Erase all circles after one jump
-    //if (x >= 300)
-        background(255, 255, 255);
+    
+    background(255, 255, 255);
 
     move();
     display();
