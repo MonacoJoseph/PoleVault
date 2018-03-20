@@ -3,7 +3,7 @@ let jumpHeight = 0;
 let x = 0;
 let y = 0;
 let time = 0;
-let diameter = 35;
+let diameter = 30;
 let speed = 0.8;
 
 let accel = 0.001;
@@ -19,12 +19,12 @@ function draw() {
 
     translate(xOrg, yOrg);
     // Erase all circles after one jump
-    if(x >=300) 
+    //if (x >= 300)
         background(255, 255, 255);
-    
+
     move();
     display();
-    
+
     // Pole
     strokeWeight(3);
     line(125, -100, 125, 100);
@@ -35,21 +35,26 @@ function draw() {
 
 // Move stick man
 function move() {
-  if(x >= 300) {
-      x = 0;
-      time = 0;
-      accel = 0.001;
-  }
-    
-  x += accel*time*time + speed*time;
-  y = (1.0/100)*(x-135)*(x-135) - 100;
-  
-  time = time + 1;
+    if (x >= 300) {
+        x = 0;
+        time = 0;
+        accel = 0.001;
+    }
+
+    x += accel * time * time + speed * time;
+    y = (1.0 / 100) * (x - 135) * (x - 135) - 100;
+
+    time = time + 1;
 }
 
 // Display stick man
 function display() {
-  ellipse(x, y, diameter, diameter);
+    ellipse(x, y, diameter, diameter);
+    line(x, y+15, x, y+75);
+    line(x, y+50, x-15, y+10);
+    line(x, y+50, x+15, y+10);
+    line(x, y+75, x-10, y+100);
+    line(x, y+75, x+10, y+100);
 }
 
 // Calculates potential jump height of pole vaulter.
