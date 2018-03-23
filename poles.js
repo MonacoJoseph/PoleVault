@@ -2,27 +2,25 @@ let jumpHeight = 0;
 
 let x = 0;
 let y = 0;
-let time = 0;
-let diameter = 30;
-let speed = 0.8;
 
+let diameter = 30;
+const RADIUS = diameter/2.0;
+let angle = 3.1415926/2;
+
+let time = 0;
+let speed = 0.8;
 let accel = 0.001;
 
 function setup() {
     createCanvas(1024, 480);
-    frameRate(5);
+    frameRate(1);
 }
 
 function draw() {
-    let xOrg = 320;
-    let yOrg = 240;
-
-    translate(xOrg, yOrg);
-    // Erase all circles after one jump
-    
+    translate(320, 240);
     background(255, 255, 255);
 
-    move();
+    //move();
     display();
 
     // Pole
@@ -38,23 +36,24 @@ function move() {
     if (x >= 300) {
         x = 0;
         time = 0;
-        accel = 0.001;
     }
 
     x += accel * time * time + speed * time;
-    y = (1.0 / 100) * (x - 135) * (x - 135) - 100;
+    y = (1.0 / 75) * (x - 135) * (x - 135) - 100;
 
     time = time + 1;
 }
 
 // Display stick man
 function display() {
-    ellipse(x, y, diameter, diameter);
-    line(x, y+15, x, y+75);
-    line(x, y+50, x-15, y+10);
-    line(x, y+50, x+15, y+10);
-    line(x, y+75, x-10, y+100);
-    line(x, y+75, x+10, y+100);
+    ellipse(x, y, diameter, diameter); // head
+    console.log(Math.ceil(RADIUS*Math.sin(angle)));
+    line(RADIUS*Math.cos(angle), Math.ceil(RADIUS*Math.sin(angle)), Math.cos(angle), y+75); // body
+    //line(x, y+50, x-15, y+10); // left arm
+    //line(x, y+50, x+15, y+10); // right arm
+    //line(x, y+75, x-10, y+100); // left leg
+    //line(x, y+75, x+10, y+100); // right leg
+    angle = angle - 3.1415926 / 8;
 }
 
 // Calculates potential jump height of pole vaulter.
